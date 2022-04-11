@@ -1,5 +1,5 @@
-const { decode } = require("punycode");
 const User = require("../Models/User");
+const { decode } = require("./jwt");
 
 module.exports = AdminRoute = async (req, res, next) => {
   const token = req.headers.authorization.split(" ");
