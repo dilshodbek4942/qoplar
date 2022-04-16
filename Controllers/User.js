@@ -32,3 +32,7 @@ exports.update = catchAsync(async (req, res) => {
 
   res.send(user);
 });
+
+exports.getInfo = catchAsync(async (req, res) => {
+  res.send(req.user);
+});
