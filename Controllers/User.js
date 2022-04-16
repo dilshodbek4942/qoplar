@@ -18,10 +18,15 @@ exports.update = catchAsync(async (req, res) => {
   const { password, ...rest } = req.body;
   const { _id } = req.params;
   const user = await User.findOne({ _id });
-  user.update(...rest);
 
-  const hashedPassword = await hashPassword(req.body.phoneNumber);
-  user.password = hashedPassword;
+  for (let p in rest) {
+    user[p] = rest[p];
+  }
+
+  if (password) {
+    const hashedPassword = await hashPassword(req.body.phoneNumber);
+    user.password = hashedPassword;
+  }
 
   await user.save();
 
